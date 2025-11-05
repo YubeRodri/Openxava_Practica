@@ -1,12 +1,41 @@
-/*C5*/SET SCHEMA PUBLIC
+/*C2*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C6*/SET SCHEMA PUBLIC
-alter table Cliente add column codigoPostal integer
-alter table Cliente add column municipio varchar(20)
-alter table Cliente add column provincia varchar(30)
-alter table Cliente add column viaPublica varchar(30)
-alter table Producto add column fotos varchar(32)
-alter table Producto add column observaciones varchar(255)
-alter table Producto add column precio numeric(19,2)
-INSERT INTO PRODUCTO VALUES(24,'El Principito','8a707cf39a3794a0019a379523900000','379E3B640AF0FC73000000002210FA64','Historia infantil',20.00)
+/*C3*/SET SCHEMA PUBLIC
+create table Autor (oid varchar(32) not null, nombre varchar(50), primary key (oid))
+alter table Producto add column autor_oid varchar(32)
+alter table Producto add constraint FKmtkejrnklbkimttu99b9jqufw foreign key (autor_oid) references Autor
+DELETE FROM PRODUCTO WHERE NUMERO=3
+COMMIT
+INSERT INTO AUTOR VALUES('8a707cf39a5157de019a5158cfce0000','Antoine de Saint-Exup\u00e9ry')
+COMMIT
+DELETE FROM PRODUCTO WHERE NUMERO=24
+INSERT INTO PRODUCTO VALUES(24,'El Principito','8a707cf39a3794a0019a379523900000','379E3B640AF0FC73000000002210FA64','Historia infantil',20.00,'8a707cf39a5157de019a5158cfce0000')
+COMMIT
+INSERT INTO AUTOR VALUES('8a707cf39a5157de019a515a36f50001','J.K Rowling')
+COMMIT
+INSERT INTO CLIENTE VALUES(2,'Kristel Porra',11204,'Managua','Managua','Praderas del Doral')
+COMMIT
+INSERT INTO CLIENTE VALUES(3,'wiwi',67,'Managua','Managua','Donde fue la morge')
+COMMIT
+INSERT INTO CLIENTE VALUES(4,'Walter Javier',1100,'Managua','Managua','Reparto Shick')
+COMMIT
+DELETE FROM CLIENTE WHERE NUMERO=1
+INSERT INTO CLIENTE VALUES(1,'Inti Montalvan',7777,'Managua','Managua','El ceibo')
+COMMIT
+INSERT INTO PRODUCTO VALUES(32,' Animales fant\u00e1sticos: Los cr\u00edmenes de Grindelwald','8a707cf39a3794a0019a379523900000','515ECC530AF0FC7300000000C2B074B0','Serie de Fantasia',120.00,'8a707cf39a5157de019a515a36f50001')
+COMMIT
+INSERT INTO PRODUCTO VALUES(30,'Animales fant\u00e1sticos y d\u00f3nde encontrarlos','8a707cf39a3794a0019a379523900000','516024500AF0FC730000000084FF0459','Libro de Fantasia ',200.00,'8a707cf39a5157de019a515a36f50001')
+COMMIT
+INSERT INTO PRODUCTO VALUES(25,'Tierra de hombres','8a707cf39a3794a0019a379523900000','51617AB60AF0FC7300000000952F6ED6','Relatos Autobiograficos',299.99,'8a707cf39a5157de019a5158cfce0000')
+COMMIT
+INSERT INTO FACTURA VALUES('8a707cf39a5157de019a5162742c0002',2025,'2025-11-04',1,'',2)
+COMMIT
+DELETE FROM FACTURA WHERE OID='8a707cf39a5157de019a5162742c0002'
+COMMIT
+INSERT INTO FACTURA VALUES('8a707cf39a5157de019a516457350003',2025,'2025-11-04',1,'Entrega de libros',2)
+INSERT INTO FACTURA_DETALLES VALUES('8a707cf39a5157de019a516457350003',0,32)
+INSERT INTO FACTURA_DETALLES VALUES('8a707cf39a5157de019a516457350003',0,30)
+COMMIT
+INSERT INTO FACTURA VALUES('8a707cf39a5157de019a516641480004',2025,'2025-11-04',2,'xd',3)
+INSERT INTO FACTURA_DETALLES VALUES('8a707cf39a5157de019a516641480004',0,25)
 COMMIT

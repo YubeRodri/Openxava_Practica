@@ -6,6 +6,9 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
+@View(name="Simple",
+members = "numero, nombre"
+)
 public class Cliente {
 
     @Id
